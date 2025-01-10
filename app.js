@@ -12,18 +12,11 @@ app.use(express.json());
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/notFound");
 
-// * COLLEGO IL DB
-const connection = require("./data/conn");
+// * IMPORTO IL ROUTER
+const moviesRouter = require("./routers/movieRouter");
 
 // * ROTTE
-app.get("/", (req, res) => {
-  const sqlMovie = "SELECT * FROM movies.movies";
-
-  connection.query(sqlMovie, (err, results) => {
-    if (err) return res.status(500).json({ error: "Database query failed" });
-    res.json(results);
-  });
-});
+app.use("/db", moviesRouter);
 
 // * GESTICO I MIDDLWARE DEGLI ERRORI
 app.use(errorHandler);
