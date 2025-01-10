@@ -2,8 +2,9 @@
 const express = require("express");
 const app = express();
 
-const host = "localhost";
-const port = 3000;
+// * IMPORTO LE VARIABILI D'AMBIENTE
+const app_port = process.env.APP_PORT;
+const app_host = process.env.APP_HOST;
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -23,6 +24,6 @@ app.use(errorHandler);
 app.use(notFound);
 
 // * METTO L'APP IN ASCOLTO
-app.listen(3000, () => {
-  console.log(`app in ascolto a http://${host}:${port}`);
+app.listen(app_port, () => {
+  console.log(`app in ascolto a http://${app_host}:${app_port}`);
 });

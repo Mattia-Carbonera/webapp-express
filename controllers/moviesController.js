@@ -1,8 +1,9 @@
 // * COLLEGO IL DB
 const connection = require("../data/conn");
 
-const host = "localhost";
-const port = 3000;
+// * IMPORTO LE VARIABILI D'AMBIENTE
+const app_port = process.env.APP_PORT;
+const app_host = process.env.APP_HOST;
 
 // * INDEX
 function index(req, res) {
@@ -34,7 +35,7 @@ function show(req, res) {
 const createMoviesImagePath = (movies) => {
   return movies.map((movie) => ({
     ...movie,
-    image: `http://${host}:${port}/${movie.image}`,
+    image: `http://${app_host}:${app_port}/${movie.image}`,
   }));
 };
 
