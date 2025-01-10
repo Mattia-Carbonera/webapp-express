@@ -7,6 +7,7 @@ const moviesController = require("../controllers/moviesController");
 // * COLLEGO IL DB
 const connection = require("../data/conn");
 
-router.use("/", moviesController.index);
+router.get("/", moviesController.index);
+router.get("/:id", moviesController.show);
 
 module.exports = router;
