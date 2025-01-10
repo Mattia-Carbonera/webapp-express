@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+// * IMPORTO I CONTROLLER
+const moviesController = require("../controllers/moviesController");
+
 // * COLLEGO IL DB
 const connection = require("../data/conn");
 
-router.use("/", (req, res) => {
-  const sqlMovie = "SELECT * FROM movies.movies";
-
-  connection.query(sqlMovie, (err, results) => {
-    if (err) return res.status(500).json({ error: "Database query failed" });
-    res.json(results);
-  });
-});
+router.use("/", moviesController.index);
 
 module.exports = router;
