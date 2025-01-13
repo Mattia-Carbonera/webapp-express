@@ -21,8 +21,10 @@ function show(req, res) {
 
   const sqlMovie = `
     SELECT *
-    FROM movies.movies
-    WHERE id = ?`;
+    FROM movies
+    INNER JOIN reviews
+    ON movies.id = reviews.movie_id
+    WHERE movie_id = ?`;
 
   connection.query(sqlMovie, [id], (err, results) => {
     if (err) return res.status(500).json({ error: "Database query failed" });
