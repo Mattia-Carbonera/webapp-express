@@ -33,7 +33,22 @@ function show(req, res) {
     res.json(createMoviesImagePath(results));
   });
 }
+// * STORE
+function store(req, res) {
+  const id = req.params.id;
+  // CODE
+  sql = `INSERT INTO movies.reviews (movie_id, name, vote, text) VALUES (?, 'Name', '4', 'Text')`;
 
+  connection.query(sql, [id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database query failed" });
+    res.json({
+      code: 200,
+      status: "Review created",
+    });
+  });
+}
+
+// * IMAGE PATH GENERATOR
 const createMoviesImagePath = (movies) => {
   return movies.map((movie) => ({
     ...movie,
@@ -41,4 +56,4 @@ const createMoviesImagePath = (movies) => {
   }));
 };
 
-module.exports = { index, show };
+module.exports = { index, show, store };
